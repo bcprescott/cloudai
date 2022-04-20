@@ -90,8 +90,8 @@ def get_emotion(emoObject):
 # Global Variables
 
 # Define your Face API auth key/endpoint
-KEY = "d8aa7548ef904e838eea77ec3adc20a2"
-ENDPOINT = "https://c1-facerecog.cognitiveservices.azure.com/"
+KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+ENDPOINT = "https://{service-name}.cognitiveservices.azure.com/"
 
 # Establish client for FaceAPI
 face_client = FaceClient(ENDPOINT, CognitiveServicesCredentials(KEY))
