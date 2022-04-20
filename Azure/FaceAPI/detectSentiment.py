@@ -18,7 +18,6 @@
 # 2. Input device for cv2, set in 'cap = cv2.VideoCapture()'
 # 3. 'frameOffset' variable, which tells it how many frames to process before sending for inference    
 
-
 import cv2
 import io
 from azure.cognitiveservices.vision.face import FaceClient
@@ -57,15 +56,18 @@ def send_inference(grayimg, faces):
     global gender
     global confidence
     # Encode the image into bytes that can be read by the API
-    stream = io.BytesIO(cv2.imencode('.jpg',grayimg)[1])
-    # Identify the face and return attributes
-    output = face_client.face.detect_with_stream(stream,return_face_id=True,return_face_attributes=['age','gender','emotion'])
-    # Pull the emotion (happy/sad/etc) and the confidence score from the result
-    emotion, confidence = get_emotion(output[0].face_attributes.emotion)
-    # Get the expected age from the API
-    age = output[0].face_attributes.age
-    # Get the expected gender from the API
-    gender = output[0].face_attributes.gender
+    try:
+        stream = io.BytesIO(cv2.imencode('.jpg',grayimg)[1])
+        # Identify the face and return attributes
+        output = face_client.face.detect_with_stream(stream,return_face_id=True,return_face_attributes=['age','gender','emotion'])
+        # Pull the emotion (happy/sad/etc) and the confidence score from the result
+        emotion, confidence = get_emotion(output[0].face_attributes.emotion)
+        # Get the expected age from the API
+        age = output[0].face_attributes.age
+        # Get the expected gender from the API
+        gender = output[0].face_attributes.gender
+    except IndexError:
+        return grayimg
 
 # Helper function that helps parse the FaceAPI results
 def get_emotion(emoObject):
