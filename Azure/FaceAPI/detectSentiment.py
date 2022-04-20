@@ -41,9 +41,9 @@ def draw_local_rectangle(img, faces):
             # Draw a box and overlay the emotion, confidence score, and assumed age
             # Only runs if a frame had been sent for inference, as to persist the last result
             rec = cv2.rectangle(img, (x, y), (x+w, y+h), (60, 169, 201), 2)
-            cv2.putText(rec, emotion, (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (200, 200, 200), 3)
-            cv2.putText(rec, str(confidence), (x+180, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (200, 200, 200), 3)
-            cv2.putText(rec, "Age"+str(age), (x+100, y+250), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (200, 200, 200), 3)
+            cv2.putText(rec, emotion, (x, y-10), cv2.FONT_HERSHEY_COMPLEX, 0.9, (200, 200, 200), 2)
+            cv2.putText(rec, str(confidence), (x+180, y-10), cv2.FONT_HERSHEY_COMPLEX, 0.9, (200, 200, 200), 2)
+            cv2.putText(rec, "Age: "+str(age), (x+100, y+250), cv2.FONT_HERSHEY_COMPLEX, 0.9, (200, 200, 200), 2)
         except NameError:
             # Standard bounding box using only OpenCV
             rec = cv2.rectangle(img, (x, y), (x+w, y+h), (60, 169, 201), 2)
@@ -90,8 +90,8 @@ def get_emotion(emoObject):
 # Global Variables
 
 # Define your Face API auth key/endpoint
-KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-ENDPOINT = "https://{service-name}.cognitiveservices.azure.com/"
+KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxx"
+ENDPOINT = "https://{FaceAPI-name}.cognitiveservices.azure.com/"
 
 # Establish client for FaceAPI
 face_client = FaceClient(ENDPOINT, CognitiveServicesCredentials(KEY))
